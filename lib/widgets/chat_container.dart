@@ -1,0 +1,48 @@
+import 'package:avera_chat/helpers/constants.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+class ChatContainer extends StatelessWidget {
+  final String text;
+  final bool left;
+  const ChatContainer({Key? key, required this.text, required this.left})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(
+        mainAxisAlignment:
+            left ? MainAxisAlignment.start : MainAxisAlignment.end,
+        children: [
+          Column(
+            crossAxisAlignment:
+                left ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width / 2,
+                margin: EdgeInsets.all(10),
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: left == true
+                        ? leftBorderRadius()
+                        : rigthBorderRadius()),
+                child: Text(
+                  text,
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+                ),
+              ),
+              Padding(
+                padding: left
+                    ? EdgeInsets.only(left: 10)
+                    : EdgeInsets.only(right: 10),
+                child: Text('12:20'),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}

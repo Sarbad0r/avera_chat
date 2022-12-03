@@ -17,4 +17,22 @@ double screenPixel(double size) {
   return pixel;
 }
 
+dynamic pushNav(BuildContext context, Widget page) {
+  return Navigator.push(context, MaterialPageRoute(builder: (context) => page));
+}
+
 List<String> appBarBottomList = ['Чаты', 'Пользователи', 'Еще'];
+
+BorderRadius leftBorderRadius() {
+  return const BorderRadius.only(
+      topLeft: Radius.circular(15),
+      topRight: Radius.circular(15),
+      bottomRight: Radius.circular(15));
+}
+
+BorderRadius rigthBorderRadius() {
+  return const BorderRadius.only(
+      topLeft: Radius.circular(15),
+      topRight: Radius.circular(15),
+      bottomLeft: Radius.circular(15));
+}
