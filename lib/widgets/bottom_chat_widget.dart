@@ -12,7 +12,7 @@ class BottomChatWidget extends StatelessWidget {
       decoration: BoxDecoration(color: Colors.grey[100]),
       padding: const EdgeInsets.all(10),
       child: Row(children: [
-        SizedBox(width: 10),
+        const SizedBox(width: 10),
         Expanded(
             child: TextField(
                 cursorColor: appColor,
@@ -26,12 +26,11 @@ class BottomChatWidget extends StatelessWidget {
         Row(children: [
           Row(children: [
             IconButton(
-                onPressed: () => [],
-                icon: Icon(Icons.image, color: appColor)),
-            SizedBox(width: 10),
+                onPressed: () => [], icon: Icon(Icons.image, color: appColor)),
+            const SizedBox(width: 10),
             IconButton(
                 onPressed: () => [], icon: Icon(Icons.mic, color: appColor)),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             IconButton(
                 onPressed: () => [], icon: Icon(Icons.send, color: appColor))
           ])

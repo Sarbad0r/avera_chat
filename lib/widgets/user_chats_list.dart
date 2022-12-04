@@ -5,13 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:provider/provider.dart';
 
 class UserChatsList extends StatelessWidget {
   const UserChatsList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var homePageManagement = Get.put(HomePageManagement());
+    var homePageProvider = Provider.of<HomePageProvider>(context);
     return Expanded(
       child: Container(
         decoration: BoxDecoration(

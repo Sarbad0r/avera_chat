@@ -21,8 +21,8 @@ class ChatContainer extends StatelessWidget {
             children: [
               Container(
                 width: MediaQuery.of(context).size.width / 2,
-                margin: EdgeInsets.all(10),
-                padding: EdgeInsets.all(10),
+                margin: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                     color: Colors.grey[200],
                     borderRadius: left == true
@@ -30,14 +30,15 @@ class ChatContainer extends StatelessWidget {
                         : rigthBorderRadius()),
                 child: Text(
                   text,
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w500, fontSize: 16),
                 ),
               ),
               Padding(
                 padding: left
-                    ? EdgeInsets.only(left: 10)
-                    : EdgeInsets.only(right: 10),
-                child: Text('12:20'),
+                    ? const EdgeInsets.only(left: 10)
+                    : const EdgeInsets.only(right: 10),
+                child: const Text('12:20'),
               )
             ],
           ),
