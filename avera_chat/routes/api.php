@@ -1,9 +1,7 @@
 <?php
 
-use App\Http\Controllers\UserMessagesController;
-use App\Models\UserMessageModel;
+use App\Http\Controllers\ChatsController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,10 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Broadcast::routes();
-Route::get('/get/event', function () {
-    event(new \App\Events\NewMessage('hello there'));
-    return 'something happend';
-});
-
-Route::post('/get/users/chat', [UserMessagesController::class, 'getAllChats']);
+Route::get('/', [ChatsController::class, 'index']);
+Route::get('messages', [ChatsController::class, 'fetchMessages']);
+Route::post('messages', [ChatsController::class, 'sendMessage']);

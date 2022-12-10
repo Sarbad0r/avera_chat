@@ -4,6 +4,7 @@ import 'package:avera_chat/state_managements/home_page_managment.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:pusher_client/pusher_client.dart';
 
 class AppTopBar extends StatefulWidget {
   const AppTopBar({Key? key}) : super(key: key);
@@ -17,8 +18,7 @@ class _AppTopBarState extends State<AppTopBar> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Provider.of<HomePageProvider>(context, listen: false).reciveMessage();
-    Provider.of<HomePageProvider>(context, listen: false).initChannel();
+    Provider.of<HomePageProvider>(context, listen: false).initPusher();
   }
 
   @override
@@ -37,7 +37,7 @@ class _AppTopBarState extends State<AppTopBar> {
                     color: Colors.white,
                     fontSize: 23)),
             IconButton(
-                onPressed: () => homePageProvider.reciveMessage(),
+                onPressed: () => homePageProvider.sendingMessage(),
                 icon: Icon(
                   Icons.search,
                   size: screenPixel(25),

@@ -2,7 +2,8 @@
 
 namespace App\Events;
 
-use GuzzleHttp\Psr7\Request;
+use App\Models\Message;
+use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -10,19 +11,23 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Redis;
 
-class NewMessage implements ShouldBroadcast
+class MessageSent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $message;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($message)
+
+    public $user;
+    public $message;
+
+    public function __construct(User $user, Message $message)
     {
+        $this->user = $user;
         $this->message = $message;
     }
 
@@ -33,6 +38,6 @@ class NewMessage implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('home');
+        return new Channel('chat');
     }
 }

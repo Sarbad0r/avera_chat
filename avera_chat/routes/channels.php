@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Support\Facades\Broadcast;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +18,9 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
-Broadcast::channel('home', function ($message, $userID) {
-    $checkUser = User::where('id', $userID)->first();
-    if ($checkUser) {
-        return $checkUser['id'];
-    }
-    return 0;
+Broadcast::channel('chat', function ($user) {
+    $user = DB::table('users')->where('name')->$user['name'];
+    if ($user)
+        return true;
+    return false;
 });

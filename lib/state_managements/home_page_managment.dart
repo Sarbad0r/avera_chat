@@ -1,41 +1,34 @@
-import 'package:avera_chat/api/api_connections.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:pusher_client/pusher_client.dart';
 
 class HomePageProvider extends ChangeNotifier {
-  PusherClient? pusher;
+  List<String> messagesList = [];
   Channel? channel;
-
-  void reciveMessage() async {
-    PusherOptions options = PusherOptions(
-      host: '192.168.100.113',
-      wsPort: 6001,
-      encrypted: false,
-      // auth: PusherAuth(
-      //   'http://example.com/auth',
-      //   headers: await ApiConnections.headers(),
-      // ),
-    );
+  PusherClient? pusher;
+  Future<void> initPusher() async {
     try {
-      pusher = PusherClient('870eabe5fa65630f1eb6', options,
-          autoConnect: false, enableLogging: true);
+      pusher =
+          PusherClient('3492cb8d8a052cdc3a74', PusherOptions(cluster: 'mt1'));
+      pusher?.connect();
+      pusher?.onConnectionStateChange((state) {
+        print(state?.currentState);
+      });
+      pusher?.onConnectionError((error) {
+        print(error?.message);
+      });
+
+      channel = pusher?.subscribe('private-my_channel');
+      channel?.bind('my_event', (event) {
+        print("data:::: ${event?.data}");
+        messagesList.add(event?.data ?? '');
+        notifyListeners();
+      });
     } catch (e) {
       print(e);
     }
-
-    pusher?.connect();
-
-// Bind to listen for events called "order-status-updated" sent to "private-orders" channel
-    channel?.bind("new_event", (PusherEvent? event) {
-      print(event?.data);
-    });
   }
 
-  void initChannel() {
-  
-  }
-
-  void disconnectPusher() async {
-    pusher?.disconnect();
+  Future<void> sendingMessage() async {
+    channel = pusher?.subscribe('my_channel');
   }
 }
